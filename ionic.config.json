@@ -1,0 +1,7 @@
+{
+  "name": "harajtmor.com",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
