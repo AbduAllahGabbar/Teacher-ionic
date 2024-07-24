@@ -1,30 +1,36 @@
 ion-toolbar {
   --background: var(--theme);
-  height: 65px;
-  --color: #009688;
+  height: 80px;
+  --color: #1475cf;
 
   a {
     text-decoration: none;
     unicode-bidi: plaintext;
 
     img {
-      width: 100px;
+      // width: 100px;
       object-fit: fill;
-      height: 62px;
+      height: 80px;
       display: inline;
       border-radius: 5px;
       float: left;
-  }
+    }
   }
 }
 .company-title {
-  background-image: linear-gradient(to left, #009688, #bcaa13, #009688, #aa9526);
+  background-image: linear-gradient(
+    to left,
+    #1475cf,
+    #bcaa13,
+    #1475cf,
+    #aa9526
+  );
   -webkit-background-clip: text;
   color: transparent;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   min-width: 70%;
-  float: right;
+  // float: right;
   margin-top: 15px;
   margin-right: 5px;
   text-wrap: pretty;
@@ -42,7 +48,13 @@ ion-toolbar {
   display: block;
   font-size: 17px;
   font-weight: bold;
-  color: #009688;
+  color: #1475cf;
+}
+.margin-2 {
+  margin: 2px;
+}
+.margin-5 {
+  margin: 5px;
 }
 
 .card-menu {
@@ -55,8 +67,14 @@ ion-toolbar {
   position: relative;
 }
 
+.menu-icon {
+  display: inline-block;
+  color: white;
+  vertical-align: text-top;
+}
+
 .header-category-row {
-  background: #009688;
+  background: #1475cf;
   overflow: auto;
   direction: rtl;
   white-space: nowrap;
@@ -71,7 +89,7 @@ ion-toolbar {
 
 .bagde-msg {
   font-size: medium;
-  background: #009688;
+  background: #1475cf;
 }
 
 .xx-large {
@@ -122,16 +140,35 @@ ion-toolbar {
 
 .footer-title {
   float: right;
-  color: #009688;
+  color: #1475cf;
   font-size: larger;
   font-weight: bold;
 }
 
 .social-logo {
   padding: 10px;
-  color: #009688;
-  font-size: xx-large;
+  color: white;
+  font-size: x-large;
+  display: inline-flex;
+  border-radius: 50%;
+  margin: 3px;
 }
+.facebook-logo {
+  background: #1475cf;
+}
+.twitter-logo {
+  background: #55acee;
+}
+.instagram-logo {
+  background-image: linear-gradient(to right top, #405de6, #5851db, #833ab4, #c13584, #fd1d1d, #f56040, #f77737, #fcaf45, #ffdc80);
+}
+.linkedin-logo {
+  background: #0077b5;
+}
+.youtube-logo {
+  background: red;
+}
+
 
 .footer-data {
   color: #8f8f8f;
@@ -173,3 +210,4 @@ ion-menu {
 #main-app-content {
   margin-top: 15%;
 }
+

@@ -47,7 +47,7 @@
         </p>
         <img
           style="height: 128px; width: 128px; border-radius: 50%"
-          [src]="user.profile.$image_url"
+          [src]="user.profile.$image"
         />
       </div>
     </ion-item>
@@ -59,7 +59,7 @@
         label="الإسم الأول"
         labelPlacement="floating"
         placeholder="أدخل الإسم الأول"
-        [(ngModel)]="user.profile.name"
+        [(ngModel)]="user.profile.firstName"
       >
       </ion-input>
     </ion-item>
@@ -71,7 +71,7 @@
         label="الإسم الثاني"
         labelPlacement="floating"
         placeholder="أدخل الإسم الثاني أو إسم العائلة"
-        [(ngModel)]="user.profile.last_name"
+        [(ngModel)]="user.profile.lastName"
       >
       </ion-input>
     </ion-item>
@@ -336,14 +336,14 @@
     </ion-button>
   </ion-row>
   <ion-row class="error-item" *ngIf="user.$myAds">
-    <ion-list *ngIf="contentList && contentList.length > 0">
+   <!--  <ion-list *ngIf="contentList && contentList.length > 0">
       <ion-item button *ngFor="let content of contentList">
         <ion-avatar
           slot="start"
           [routerLink]="['/content-details']"
           [queryParams]="{id: content.id}"
         >
-          <img [src]="content.image_url" />
+          <img [src]="content.image" />
         </ion-avatar>
         <ion-label
           class="ion-text-wrap"
@@ -355,13 +355,13 @@
             {{content.$time}} <ion-icon name="time-outline"></ion-icon>
           </p>
         </ion-label>
-        <!-- ion-badge -->
+         ion-badge 
         <ion-button color="danger" (click)="deleteAd(content.id)">
           <ion-icon name="trash-outline"></ion-icon>
           <ion-label>إزالة</ion-label>
         </ion-button>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
     <ion-item class="error-item">
       <ion-label *ngIf="user.$error" class="errors">{{user.$error}}</ion-label>
     </ion-item>

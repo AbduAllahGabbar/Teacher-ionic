@@ -8,13 +8,13 @@ const routes: Routes = [
     path: '',
     component: HomePage,
     children: [
-      {
-        path: 'content-details',
-        loadChildren: () =>
-          import('../content-details/content-details.module').then(
-            (m) => m.ContentDetailsPageModule
-          ),
-      },
+      // {
+      //   path: 'content-details',
+      //   loadChildren: () =>
+      //     import('../content-details/content-details.module').then(
+      //       (m) => m.ContentDetailsPageModule
+      //     ),
+      // },
     ],
   },
 ];

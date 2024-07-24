@@ -99,7 +99,6 @@
     </ion-button>
   </div>
   <div
-    *ngIf="isite.db.setting.enable_sending_messages_mobile_taqnyat && user.$deal && !user.$showContent"
   >
     <div *ngIf="!mailer.$send_code">
       <ion-list>
@@ -169,12 +168,12 @@
     <ion-list>
       <ion-item>
         <div (click)="selectImage()" class="upload-img">
-          <p *ngIf="!user.$image_url" class="title-uploadimg">
+          <p *ngIf="!user.$image" class="title-uploadimg">
             <ion-icon name="camera-outline"></ion-icon> صورة شخصية
           </p>
           <img
             style="height: 128px; width: 128px; border-radius: 50%"
-            [src]="user.$image_url"
+            [src]="user.$image"
           />
         </div>
       </ion-item>
@@ -184,7 +183,7 @@
           label="الإسم الأول"
           labelPlacement="floating"
           placeholder="أدخل الإسم الأول"
-          [(ngModel)]="user.first_name"
+          [(ngModel)]="user.firstName"
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -193,7 +192,7 @@
           label="الإسم الثاني"
           labelPlacement="floating"
           placeholder="أدخل الإسم الثاني أو إسم العائلة"
-          [(ngModel)]="user.last_name"
+          [(ngModel)]="user.lastName"
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -209,7 +208,6 @@
         ></ion-input>
       </ion-item>
       <ion-item
-        *ngIf="!isite.db.setting.enable_sending_messages_mobile_taqnyat"
       >
         <ion-select
           label="الدولة"
@@ -228,7 +226,6 @@
       </ion-item>
 
       <ion-item
-        *ngIf="!isite.db.setting.enable_sending_messages_mobile_taqnyat"
       >
         <ion-input
           [clearInput]="true"

@@ -97,21 +97,21 @@ export class NotificPage implements OnInit {
       })
       .subscribe((res: any) => {
         if (res.done) {
-          if (notific.type == 'comments_my_ads') {
-            this.router.navigate(['/content-details'], {
-              queryParams: { id: notific.action.id, name: notific.action.name },
-            });
-          } else if (notific.type == 'private_messages') {
-            this.router.navigateByUrl('/message', { replaceUrl: true });
-          } else if (notific.type == 'replies_ads_followed') {
-            this.router.navigate(['/content-details'], {
-              queryParams: { id: notific.action.id, name: notific.action.name },
-            });
-          }  else if (notific.type == 'ads_members_follow') {
-            this.router.navigate(['/content-details'], {
-              queryParams: { id: notific.action.id, name: notific.action.name },
-            });
-          }
+          // if (notific.type == 'comments_my_ads') {
+          //   this.router.navigate(['/content-details'], {
+          //     queryParams: { id: notific.action.id, name: notific.action.name },
+          //   });
+          // } else if (notific.type == 'private_messages') {
+          //   this.router.navigateByUrl('/message', { replaceUrl: true });
+          // } else if (notific.type == 'replies_ads_followed') {
+          //   this.router.navigate(['/content-details'], {
+          //     queryParams: { id: notific.action.id, name: notific.action.name },
+          //   });
+          // }  else if (notific.type == 'ads_members_follow') {
+          //   this.router.navigate(['/content-details'], {
+          //     queryParams: { id: notific.action.id, name: notific.action.name },
+          //   });
+          // }
         }
       });
   }
@@ -153,7 +153,7 @@ export interface notif {
   action: any;
   user_action: any;
   type: string;
-  image_url: string;
+  image: string;
   name: string;
   show: boolean;
   $time: string;
@@ -163,10 +163,9 @@ export interface user {
   id: number;
   $busy: boolean;
   email: string;
-  name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   mobile: string;
   $mobile: string;
-  profile: any;
   notific_setting: any;
 }

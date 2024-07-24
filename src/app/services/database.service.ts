@@ -6,38 +6,50 @@ import { PhotoService } from './photo.service';
 })
 export class DatabaseService {
   setting: setting;
-  time: time;
   userSession: userSession;
-  content: content;
-  contentList: [content];
+   packagesList: [packagesList];
+   lecturesList: [lecturesList];
+   booksList: [booksList];
+   teachersList: [teachersList];
+   childrenList: [childrenList];
   constructor(public photoService: PhotoService) {
 
     this.setting = {
-      site_name: '',
-      tax_number_show: false,
-      enable_sending_messages_mobile_taqnyat: false,
-      show_commission_add_content: false,
-      commission_value: '',
-      commercial_registration_no_show: false,
-      commercial_registration_no: '',
-      content: {},
-      tax_number: '',
-      you_tube_accouunt: '',
-      transfer_form_text:'',
-      instagram_accouunt: '',
-      twitter_accouunt: '',
-      facebook_account: '',
-      powered_whatsapp: '',
-      powered_logo: '',
-      powered_title: '',
-      phone: '',
+      teacher : {},
       email: '',
-      logo: '../assets/images/logo.png',
-      commission_description: '',
-      commission_main_title: '',
-      commission_logo: '',
-      bank_account_list : [],
-      currency: {},
+      host: '',
+      whatsapp: '',
+      supportEmail: '',
+      phone: '',
+      facebookAccount: '',
+      instagramAccouunt: '',
+      youTubeAccouunt: '',
+      twitterAccouunt: '',
+      snapAccouunt: '',
+      linkedinAccouunt: '',
+      telegramAccouunt: '',
+      skypeAccouunt: '',
+      siteName: '',
+      titleSeparator: '',
+      siteSlogan: '',
+      registerAlert: '',
+      description: '',
+      textPurchaseByBook: '',
+      textPurchaseByCode: '',
+      logo: '',
+      footerLogo: '',
+      banner: '',
+      codeCard: '',
+      isShared: false,
+      citiesAndAreasShow: false,
+      nationalitiesShow: false,
+      nameBesidLogoShow: false,
+      showParent: false,
+      showPackages: false,
+      showLectures: false,
+      showBooks: false,
+      showBanner: false,
+
     };
   }
 }
@@ -45,55 +57,109 @@ export interface UserPhoto {
   filepath: string;
   webviewPath: string;
 }
-export interface time {
-  time1: string;
-}
+
 export interface setting {
-  commission_value: string;
-  show_commission_add_content: boolean;
-  site_name: string;
-  commission_description: string;
-  commission_main_title: string;
-  commission_logo: string;
-  tax_number_show: boolean;
-  enable_sending_messages_mobile_taqnyat : boolean;
-  commercial_registration_no_show: boolean;
-  commercial_registration_no: string;
-  tax_number: string;
-  you_tube_accouunt: string;
-  transfer_form_text : string;
-  instagram_accouunt: string;
-  twitter_accouunt: string;
-  facebook_account: string;
-  phone: string;
-  currency: any;
-  bank_account_list : any[];
-  content: any;
-  powered_whatsapp: string;
-  powered_logo: string;
-  powered_title: string;
-  email: string;
-  logo: string;
+  teacher : any,
+  email : string,
+  host : string,
+  whatsapp : string,
+  supportEmail : string,
+  phone : string,
+  facebookAccount : string,
+  instagramAccouunt : string,
+  youTubeAccouunt : string,
+  twitterAccouunt : string,
+  snapAccouunt : string,
+  linkedinAccouunt : string,
+  telegramAccouunt : string,
+  skypeAccouunt : string,
+  siteName : string,
+  titleSeparator : string,
+  siteSlogan : string,
+  registerAlert : string,
+  description : string,
+  textPurchaseByBook : string,
+  textPurchaseByCode : string,
+  logo : string,
+  footerLogo : string,
+  banner : string,
+  codeCard : string,
+  isShared : boolean,
+  citiesAndAreasShow : boolean,
+  nationalitiesShow : boolean,
+  nameBesidLogoShow : boolean,
+  showParent : boolean,
+  showPackages : boolean,
+  showLectures : boolean,
+  showBooks : boolean,
+  showBanner : boolean,
+
+}
+
+export interface childrenList {
+  id: number;
+  _id: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+}
+
+export interface teachersList {
+  id: number;
+  _id: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+  title: string;
+  bio: number;
+}
+
+export interface packagesList {
+  id: number;
+  _id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+  totalLecturesPrice: number;
+}
+export interface lecturesList {
+  id: number;
+  _id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+}
+export interface booksList {
+  id: number;
+  _id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
 }
 export interface userSession {
   id: number;
-  message_count: number;
-  notific_count: number;
-  main_address: any;
+  _id: string;
   email: string;
-  name: string;
-  last_name: string;
-  image_url: string;
+  firstName: string;
+  lastName: string;
+  image: string;
   mobile: string;
-  feedback_list: any[];
+  notificationsCount : number;
+  type: string;
+  notificationsList: any[];
+  booksList: any[];
+  lecturesList: any[];
+  packagesList: any[];
+  schoolYear : any;
+  educationalLevel : any;
+
+
 }
-export interface content {
+export interface teacher {
   id: number;
-  image_url: string;
-  name: string;
-  address: any;
-  set_price: string;
-  quantity_list: any[];
-  store: any;
-  $time: string;
+  _id: string;
+  firstName: string;
 }

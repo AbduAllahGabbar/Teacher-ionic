@@ -22,7 +22,7 @@ import { timeout } from 'rxjs';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: [
-    './pages/content-details/content-details.page.scss',
+    // './pages/content-details/content-details.page.scss',
     'app.component.scss',
   ],
 })
@@ -40,8 +40,7 @@ export class AppComponent {
     public loadingCtrl: LoadingController
   ) {
    
-    this.startTime();
-    this.getCategories();
+    // this.getCategories();
   }
 
   async logout() {
@@ -105,7 +104,7 @@ export class AppComponent {
             id: 1,
             name_ar: 1,
             name_en: 1,
-            image_url: 1,
+            image: 1,
           },
           limit: 8,
         },
@@ -117,30 +116,7 @@ export class AppComponent {
       });
   }
 
-  startTime() {
-    var d = new Date();
-    var local = d.getTime();
-    var offset = d.getTimezoneOffset() * (60 * 1000);
-    var utc = new Date(local + offset);
-    var riyadh = new Date(utc.getTime() + 3 * 60 * 60 * 1000);
-    let h = riyadh.getHours();
-    let m = riyadh.getMinutes();
-    let s = riyadh.getSeconds();
-    m = this.checkTime(m);
-    s = this.checkTime(s);
-    this.isite.db.time.time1 = h + ':' + m + ':' + s;
-    /* document.getElementById("time1").innerHTML = h + ":" + m + ":" + s; */
-    setTimeout(() => {
-      this.startTime();
-    }, 1000);
-  }
 
-  checkTime(i) {
-    if (i < 10) {
-      i = '0' + i;
-    }
-    return i;
-  }
 
   async login() {
     const modal = await this.modalCtrl.create({
@@ -188,9 +164,9 @@ export class AppComponent {
             '/' +
             this.isite.db.userSession.id +
             '/' +
-            this.isite.db.userSession.name +
+            this.isite.db.userSession.firstName +
             '/' +
-            this.isite.db.userSession.last_name +
+            this.isite.db.userSession.lastName +
             '?access-token=' +
             this.isite.accessToken,
           '_self',
@@ -282,7 +258,7 @@ export class AppComponent {
 }
 export interface header_category_list {
   id: number;
-  image_url: string;
+  image: string;
   name_ar: string;
   name_en: string;
 }

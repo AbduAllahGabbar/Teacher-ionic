@@ -25,7 +25,7 @@ import {
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: [
-    '../content-details/content-details.page.scss',
+    // '../content-details/content-details.page.scss',
     './register.page.scss',
   ],
 })
@@ -48,14 +48,14 @@ export class RegisterPage implements OnInit {
       $deal: false,
       $showContent: false,
       id: 0,
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       mobile: '',
       email: '',
       password: '',
       re_password: '',
-      image_url: '',
-      $image_url: '',
+      image: '',
+      $image: '',
       $country: '',
       country: {},
     };
@@ -100,8 +100,8 @@ export class RegisterPage implements OnInit {
     this.http
       .post(`${this.isite.baseURL}/x-api/upload/image`, formData)
       .subscribe((res: any) => {
-        this.user.image_url = res.image.url;
-        this.user.$image_url = this.isite.baseURL + res.image.url;
+        this.user.image = res.image.url;
+        this.user.$image = this.isite.baseURL + res.image.url;
         loading.dismiss();
       });
   }
@@ -113,11 +113,8 @@ export class RegisterPage implements OnInit {
 
     if (user) {
       user.$error = '';
-      if (!user.first_name) {
+      if (!user.firstName) {
         user.$error = 'يجب إدخال الإسم الأول';
-        return;
-      } else if (!user.last_name) {
-        user.$error = 'يجب إدخال الإسم الثاني';
         return;
       } else if (!user.email) {
         user.$error = 'يجب إدخال البريد';
@@ -145,9 +142,9 @@ export class RegisterPage implements OnInit {
           email: user.email,
           password: user.password,
           mobile: user.mobile,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          image_url: user.image_url,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          image: user.image,
           country_code: country.country_code,
           length_mobile: country.length_mobile,
         };
@@ -188,21 +185,21 @@ export class RegisterPage implements OnInit {
             name_ar: 1,
             name_en: 1,
             code: 1,
-            image_url: 1,
+            image: 1,
             country_code: 1,
             length_mobile: 1,
           },
         },
       })
       .subscribe((res: any) => {
-        if (!this.isite.db.setting.enable_sending_messages_mobile_taqnyat) {
-          this.user.$showContent = true;
-        }
+        // if (!this.isite.db.setting.enable_sending_messages_mobile_taqnyat) {
+        //   this.user.$showContent = true;
+        // }
         if (res.done && res.list.length > 0) {
           for (let i = 0; i < res.list.length; i++) {
             const element = res.list[i];
-            if (element.image_url) {
-              element.image_url = this.isite.baseURL + element.image_url;
+            if (element.image) {
+              element.image = this.isite.baseURL + element.image.url;
             }
             element.country_code = element.country_code || '';
             element.length_mobile = element.length_mobile || 0;
@@ -337,11 +334,11 @@ export interface user {
   $deal: boolean;
   $busy: boolean;
   $showContent: boolean;
-  image_url: string;
-  $image_url: string;
+  image: string;
+  $image: string;
   $error: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   mobile: string;
   email: string;
   password: string;
@@ -351,7 +348,7 @@ export interface user {
 }
 export interface countriesList {
   id: number;
-  image_url: string;
+  image: string;
   name_ar: string;
   name_en: string;
   code: string;

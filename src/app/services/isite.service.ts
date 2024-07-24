@@ -25,7 +25,7 @@ import { get } from 'http';
 export class IsiteService {
   busy: boolean = false;
   accessToken: string = null;
-  baseURL: string = 'http://127.0.0.1';
+  baseURL: string = 'http://shared.localhost';
   loader: HTMLIonLoadingElement = null;
   browser: InAppBrowserObject = null;
   constructor(
@@ -77,9 +77,7 @@ export class IsiteService {
       return false;
     }
     this.busy = true;
-    this.db.time = {
-      time1: '',
-    };
+   
     const loader = await this.loadingCtrl.create({
       message: ' انتظر قليلا - جاري التحميل',
     });
@@ -89,7 +87,7 @@ export class IsiteService {
       this.accessToken =
         (await (await Preferences.get({ key: 'accessToken' })).value) || null;
     }
-
+    
     this.getUserSession(() => {
       loader.dismiss();
     });
@@ -110,65 +108,75 @@ export class IsiteService {
 
       if (resUserSession.done) {
         if (resUserSession.session.user) {
-        this.updateVisit();
+        // this.updateVisit();
 
           this.db.userSession = {
             id: resUserSession.session.user.id,
+            _id: resUserSession.session.user._id,
             email: resUserSession.session.user.email,
             mobile: resUserSession.session.user.mobile,
-            name: resUserSession.session.user.profile.name,
-            last_name: resUserSession.session.user.profile.last_name,
-            image_url: resUserSession.session.user.profile.image_url,
-            feedback_list: resUserSession.session.user.feedback_list,
-            message_count: resUserSession.session.user.message_count,
-            notific_count: resUserSession.session.user.notific_count,
-            main_address: resUserSession.session.user.profile.main_address,
+            firstName: resUserSession.session.user.firstName,
+            lastName: resUserSession.session.user.lastName,
+            image: resUserSession.session.user.image.url,
+            type: resUserSession.session.user.type,
+            notificationsCount: resUserSession.session.user.notificationsCount,
+            notificationsList: resUserSession.session.user.notificationsList,
+            booksList: resUserSession.session.user.booksList,
+            lecturesList: resUserSession.session.user.lecturesList,
+            packagesList: resUserSession.session.user.packagesList,
+            schoolYear: resUserSession.session.user.schoolYear,
+            educationalLevel: resUserSession.session.user.educationalLevel,
+ 
           };
-          this.db.userSession.image_url =
-            this.baseURL + this.db.userSession.image_url;
+          this.db.userSession.image =
+            this.baseURL + this.db.userSession.image;
           /*           this.updateVisit();
            */
+
         }
       }
     });
   }
 
   async getSetting() {
-    this.api('/api/default_setting/get').subscribe((res: any) => {
+    this.api('/api/get-site-setting').subscribe((res: any) => {
       if (res.done) {
-
+        
         this.db.setting = res.doc;
-        this.db.setting.tax_number_show = res.doc.tax_number_show || false;
-        this.db.setting.enable_sending_messages_mobile_taqnyat = res.doc.enable_sending_messages_mobile_taqnyat || false;
-        this.db.setting.commercial_registration_no_show =
-          res.doc.commercial_registration_no_show || false;
-        this.db.setting.commercial_registration_no =
-          res.doc.commercial_registration_no || '';
-        this.db.setting.show_commission_add_content = res.doc.show_commission_add_content;
-        this.db.setting.tax_number = res.doc.tax_number || '';
-        this.db.setting.tax_number = res.doc.tax_number || '';
-        this.db.setting.transfer_form_text = res.doc.transfer_form_text || '';
-        this.db.setting.you_tube_accouunt = res.doc.you_tube_accouunt || '';
-        this.db.setting.instagram_accouunt = res.doc.instagram_accouunt || '';
-        this.db.setting.twitter_accouunt = res.doc.twitter_accouunt || '';
-        this.db.setting.facebook_account = res.doc.facebook_account || '';
-        this.db.setting.powered_whatsapp = res.doc.powered_whatsapp || '';
-        this.db.setting.powered_logo = res.doc.powered_logo || '';
-        this.db.setting.powered_title = res.doc.powered_title || '';
-        this.db.setting.currency = res.doc.currency || {};
-        this.db.setting.phone = res.doc.phone || '';
+        this.db.setting.teacher = res.doc.teacher || {};
         this.db.setting.email = res.doc.email || '';
-        this.db.setting.logo = this.baseURL + this.db.setting.logo;
-        this.db.setting.commission_logo = this.baseURL + this.db.setting.commission_logo;
-        if (this.db.setting.bank_account_list && this.db.setting.bank_account_list.length > 0) {
-          this.db.setting.bank_account_list.forEach(element => {
-            element.image_url = this.baseURL + element.image_url;
-          });
-        }
-        if (this.db.setting.powered_logo) {
-          this.db.setting.powered_logo =
-            this.baseURL + this.db.setting.powered_logo;
-        }
+        this.db.setting.host = 'shared.localhost';
+        this.db.setting.whatsapp = res.doc.whatsapp || '';
+        this.db.setting.supportEmail = res.doc.supportEmail || '';
+        this.db.setting.phone = res.doc.phone || '';
+        this.db.setting.facebookAccount = res.doc.facebookAccount || '';
+        this.db.setting.instagramAccouunt = res.doc.instagramAccouunt || '';
+        this.db.setting.youTubeAccouunt = res.doc.youTubeAccouunt || '';
+        this.db.setting.twitterAccouunt = res.doc.twitterAccouunt || '';
+        this.db.setting.snapAccouunt = res.doc.snapAccouunt || '';
+        this.db.setting.linkedinAccouunt = res.doc.linkedinAccouunt || '';
+        this.db.setting.telegramAccouunt = res.doc.telegramAccouunt || '';
+        this.db.setting.skypeAccouunt = res.doc.skypeAccouunt || '';
+        this.db.setting.siteName = res.doc.siteName || '';
+        this.db.setting.titleSeparator = res.doc.titleSeparator || '';
+        this.db.setting.siteSlogan = res.doc.siteSlogan || '';
+        this.db.setting.description = res.doc.description || '';
+        this.db.setting.textPurchaseByBook = res.doc.textPurchaseByBook || '';
+        this.db.setting.textPurchaseByCode = res.doc.textPurchaseByCode || '';
+        this.db.setting.logo = res.doc.logo ? this.baseURL +  res.doc.logo.url : '';
+        this.db.setting.footerLogo = res.doc.footerLogo ? this.baseURL +  res.doc.footerLogo.url : '';
+        this.db.setting.banner = res.doc.banner ? this.baseURL +  res.doc.banner.url : '';
+        this.db.setting.codeCard = res.doc.codeCard || '';
+        this.db.setting.isShared = res.doc.isShared || false;
+        this.db.setting.citiesAndAreasShow = res.doc.citiesAndAreasShow || false;
+        this.db.setting.nationalitiesShow = res.doc.nationalitiesShow || false;
+        this.db.setting.nameBesidLogoShow = res.doc.nameBesidLogoShow || false;
+        this.db.setting.showParent = res.doc.showParent || false;
+        this.db.setting.showPackages = res.doc.showPackages || false;
+        this.db.setting.showLectures = res.doc.showLectures || false;
+        this.db.setting.showBooks = res.doc.showBooks || false;
+        this.db.setting.showBanner = res.doc.showBanner || false;
+     
       }
     });
   }

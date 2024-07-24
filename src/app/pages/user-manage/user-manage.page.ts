@@ -47,8 +47,8 @@ export class UserManagePage implements OnInit {
       $error: '',
       $gender: '',
       email: '',
-      name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       $current_password: '',
       $new_password: '',
       $re_password: '',
@@ -97,16 +97,16 @@ export class UserManagePage implements OnInit {
       .post(`${this.isite.baseURL}/x-api/upload/image`, formData)
       .subscribe((res: any) => {
         if (type == 'logo') {
-          this.user.profile.image_url = res.image.url;
-          this.user.profile.$image_url = this.isite.baseURL + res.image.url;
+          this.user.profile.image = res.image.url;
+          this.user.profile.$image = this.isite.baseURL + res.image.url;
         } else if (type == 'cover') {
           this.user.profile.cover = res.image.url;
           this.user.profile.$cover = this.isite.baseURL + res.image.url;
         }
         this.editPersonalInfoUser(type);
 
-        /* this.user.image_url = res.image.url;
-        this.user.$image_url = this.isite.baseURL + res.image.url; */
+        /* this.user.image = res.image.url;
+        this.user.$image = this.isite.baseURL + res.image.url; */
         loading.dismiss();
       });
   }
@@ -145,8 +145,8 @@ export class UserManagePage implements OnInit {
 
             this.user.profile.$cover =
               this.isite.baseURL + this.user.profile.cover;
-            this.user.profile.$image_url =
-              this.isite.baseURL + this.user.profile.image_url;
+            this.user.profile.$image =
+              this.isite.baseURL + this.user.profile.image.url;
             if (this.user.gender) {
               this.user.$gender = this.user.gender.name;
             }
@@ -253,8 +253,8 @@ export class UserManagePage implements OnInit {
             /* this.user = res.doc;
             this.user.profile.$cover =
               this.isite.baseURL + this.user.profile.cover;
-            this.user.profile.$image_url =
-              this.isite.baseURL + this.user.profile.image_url; */
+            this.user.profile.$image =
+              this.isite.baseURL + this.user.profile.image; */
           } else {
             this.user.$error = res.error;
           }
@@ -312,7 +312,7 @@ export class UserManagePage implements OnInit {
         .subscribe((res: any) => {
           if (res.done) {
             res.list.forEach((ad) => {
-              ad.image_url = this.isite.baseURL + ad.image_url;
+              ad.image = this.isite.baseURL + ad.image.url;
               ad.address = ad.address || {};
               ad.address = {
                 detailed_address: ad.address.detailed_address || '',
@@ -406,7 +406,7 @@ export class UserManagePage implements OnInit {
             id: 1,
             name_ar: 1,
             name_en: 1,
-            image_url: 1,
+            image: 1,
             country_code: 1,
           },
         },
@@ -414,7 +414,7 @@ export class UserManagePage implements OnInit {
       .subscribe((res: any) => {
         if (res.done) {
           res.list.forEach((_c) => {
-            _c.image_url = this.isite.baseURL + _c.image_url;
+            _c.image = this.isite.baseURL + _c.image.url;
           });
           this.countries_list = res.list;
         }
@@ -426,13 +426,13 @@ export class UserManagePage implements OnInit {
         url: '/api/goves/all',
         body: {
           where: { active: true, 'country.id': Number(country) },
-          select: { id: 1, name_ar: 1, name_en: 1, image_url: 1 },
+          select: { id: 1, name_ar: 1, name_en: 1, image: 1 },
         },
       })
       .subscribe((res: any) => {
         if (res.done) {
           res.list.forEach((_c) => {
-            _c.image_url = this.isite.baseURL + _c.image_url;
+            _c.image = this.isite.baseURL + _c.image.url;
           });
           this.goves_list = res.list;
         }
@@ -444,13 +444,13 @@ export class UserManagePage implements OnInit {
         url: '/api/city/all',
         body: {
           where: { active: true, 'gov.id': Number(gov) },
-          select: { id: 1, name_ar: 1, name_en: 1, image_url: 1 },
+          select: { id: 1, name_ar: 1, name_en: 1, image: 1 },
         },
       })
       .subscribe((res: any) => {
         if (res.done) {
           res.list.forEach((_c) => {
-            _c.image_url = this.isite.baseURL + _c.image_url;
+            _c.image = this.isite.baseURL + _c.image.url;
           });
           this.cities_list = res.list;
         }
@@ -463,13 +463,13 @@ export class UserManagePage implements OnInit {
         url: '/api/area/all',
         body: {
           where: { active: true, 'city.id': Number(city) },
-          select: { id: 1, name_ar: 1, name_en: 1, image_url: 1 },
+          select: { id: 1, name_ar: 1, name_en: 1, image: 1 },
         },
       })
       .subscribe((res: any) => {
         if (res.done) {
           res.list.forEach((_c) => {
-            _c.image_url = this.isite.baseURL + _c.image_url;
+            _c.image = this.isite.baseURL + _c.image.url;
           });
           this.areas_list = res.list;
         }
@@ -486,7 +486,7 @@ export class UserManagePage implements OnInit {
 }
 export interface content {
   id: number;
-  image_url: string;
+  image: string;
   name: string;
   address: any;
   set_price: string;
@@ -497,10 +497,10 @@ export interface user {
   id: number;
   $busy: boolean;
   email: string;
-  name: string;
+  firstName: string;
   $error: string;
   $gender: string;
-  last_name: string;
+  lastName: string;
   $current_password: string;
   $new_password: string;
   $re_password: string;
@@ -519,7 +519,7 @@ export interface user {
 }
 export interface countries_list {
   id: number;
-  image_url: string;
+  image: string;
   country_code: string;
   name_ar: string;
   name_en: string;
@@ -527,19 +527,19 @@ export interface countries_list {
 
 export interface goves_list {
   id: number;
-  image_url: string;
+  image: string;
   name_ar: string;
   name_en: string;
 }
 export interface cities_list {
   id: number;
-  image_url: string;
+  image: string;
   name_ar: string;
   name_en: string;
 }
 export interface areas_list {
   id: number;
-  image_url: string;
+  image: string;
   name_ar: string;
   name_en: string;
 }
